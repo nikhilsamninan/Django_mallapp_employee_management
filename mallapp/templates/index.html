@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<style>
+  .table td{
+    border-color:deepskyblue;
+  }
+  .table thead th{
+    border-bottom:none;
+  }
+  .table td, .table th{
+    border-top:none;
+  }
+  .table{
+    color: floralwhite;
+    background-color: indianred;
+  }
+</style>
+</head>
+<body style="background-color: cornflowerblue;">
+  
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active " href="{% url 'homepage' %}">Admin Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{% url 'userhome' %}">Show User Home</a>
+            <a class="nav-item nav-link" href="{% url 'modelform' %}">Insert New</a>
+            <a class="nav-item nav-link" href="{% url 'imageupload' %}">upload Photo</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+           
+            
+          </div>
+        </div>
+      </nav>
+    
+
+    {% block content %}
+      <table class="table">
+        <thead >
+          <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Age</th>
+              <th>Address</th>
+              <th>Position</th>
+              <th>Username</th>
+              <th>Password</th>              
+          </tr>
+        </thead>
+        <tbody>
+         
+            {%for i in data%}
+            <tr>
+                <td>{{i.firstname}}</td>
+                <td>{{i.lastname}}</td>
+                <td>{{i.age}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.position}}</td>
+                <td>{{i.username}}</td>
+                <td>{{i.password}}</td>
+                <td><a href="{% url 'update' i.id %}"><button class="btn btn-primary" value="submit">Update</button></a></td>
+                <td><a href="{% url 'delete' i.id %}"><button class="btn btn-danger" value="submit">Delete</button></a></td>
+            </tr>
+            {%endfor%}
+            {% endblock content %}    
+        
+        </tbody>
+      </table>
+</body>
+</html>
